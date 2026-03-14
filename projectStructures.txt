@@ -1,0 +1,71 @@
+my-app/
+│── .env                    # Environment variables
+│── index.html              # Vite entry
+│── vite.config.ts          # Vite config
+│── package.json
+│── tsconfig.json (if using TS)
+
+src/
+│── main.tsx                # App entry, wraps App with Providers
+│── App.tsx                 # Root App component
+│── assets/                 # Images, fonts, static assets
+│── styles/                 # Global styles, Tailwind config if needed
+│
+├── app/                    # RTK store configuration
+│   ├── store.ts            # Redux store setup
+│   ├── rootReducer.ts      # Root reducer (combineSlices if needed)
+│
+├── features/               # Feature-based foldering (RTK recommended)
+│   ├── auth/               
+│   │   ├── authSlice.ts    # RTK slice (reducers, actions)
+│   │   ├── authApi.ts      # RTK Query service (if using RTK Query)
+│   │   ├── components/     # UI components related to auth
+│   │   └── pages/          # Pages like Login, Register
+│   │
+│   ├── users/
+│   │   ├── usersSlice.ts
+│   │   ├── usersApi.ts
+│   │   ├── components/     # Reusable user components
+│   │   └── pages/          # e.g., UserList, UserDetail
+│   │
+│   └── ...otherFeatures
+│
+├── components/             # Shared/reusable components (Buttons, Navbar, Table, Modal)
+│
+├── hooks/                  # Custom hooks (useAuth, useDebounce, useFetch)
+│
+├── layouts/                # Page layouts (AdminLayout, PublicLayout, etc.)
+│
+├── routes/                 
+│   ├── PrivateRoutes.tsx,PublicRoutes.tsx,ProtectedRoutes.tsx       # Central route definitions (using react-router-dom v6)
+│
+├── services/               # API clients (Axios base instance, helpers)
+│   ├── apiClient.ts
+│
+├── utils/                  # Helper functions (dateFormat, storage, validators)
+│
+└── constants/              # Constants, config values, roles, enums
+
+
+
+📌 Best Practices
+
+Feature-first structure → Each feature manages its own slice, API, components, and pages.
+
+RTK Query → Use it for API requests, caching, and invalidation (instead of Axios everywhere).
+
+Shared components in /components → Button, Modal, Table, Loader.
+
+Layouts → Keep Admin/Public separated.
+
+Utils/hooks → For common logic (useAuth, useFetch, debounce).
+
+Absolute imports → Configure Vite alias (@/features/auth/...) in vite.config.js.
+
+Testing ready → Write Jest/RTL tests inside __tests__ or next to components.
+
+Form handling library
+React hook form with yup validation
+
+Use register for native inputs (input, select, textarea).
+Use Controller for third-party controlled components (MUI, AntD, React Select, Date pickers, etc.).
